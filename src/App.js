@@ -14,12 +14,27 @@ import TokenMaster from './abis/TokenMaster.json'
 import config from './config.json'
 
 function App() {
+  const [account, setAccount] = useState(null);
+
+  const loadBlockchainData = async () => {
+    // Refresh Account
+    window.ethereum.on('accountsChanged', async () => {
+      let accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      let account = ethers.getAddress(accounts[0]);
+      setAccount(account);
+    });
+  }
+
+  useEffect(() => {
+    loadBlockchainData();
+  }, []);
 
   return (
     <div>
       <header>
+        <Navigation account={account} setAccount={setAccount} />
 
-        <h2 className="header__title"><strong>Welcome to Tokenmaster</strong></h2>
+        <h2 className="header__title"><strong>Event</strong> Tickets</h2>
       </header>
 
     </div>
