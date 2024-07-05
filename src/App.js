@@ -41,7 +41,6 @@ function App() {
       occasions.push(occasion);
     }
     setOccasions(occasions);
-    console.log(occasions);
 
     // Refresh Account
     window.ethereum.on('accountsChanged', async () => {
